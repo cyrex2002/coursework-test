@@ -5,6 +5,8 @@ public abstract class  Product {
     private int availableItems;
     private double price ;
 
+
+
     Product(String productID,String productName,int availableItems,double price){
         this.productID = productID;
         this.productName = productName;
