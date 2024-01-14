@@ -7,20 +7,22 @@ public abstract class  Product {
 
 
 
-    Product(String productID,String productName,int availableItems,double price){
+    Product(String productID,String productName,double price){
         this.productID = productID;
         this.productName = productName;
-        this.availableItems = availableItems;
         this.price = price ;
     }
 
     public String getProductID(){
         return productID;
-    }public String getProductName(){
+    }
+    public String getProductName(){
         return productName;
-    }public int getAvailableItems(){
+    }
+    public int getAvailableItems(){
         return availableItems;
-    }public double getPrice(){
+    }
+    public double getPrice(){
         return price;
     }
 

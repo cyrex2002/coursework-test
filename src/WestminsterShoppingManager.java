@@ -1,11 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WestminsterShoppingManager implements ShoppingManager{
 
     Scanner scanner = new Scanner(System.in);
+    Product product1;
+
+
+
 
     @Override
-    public Product addNewProduct() {
+     public Product addNewProduct() {
 
         System.out.println("Enter product type");
         String productType = scanner.next();
@@ -14,25 +19,36 @@ public class WestminsterShoppingManager implements ShoppingManager{
         String productId1 = scanner.next();
 
         System.out.println("Enter product name");
-        String productname1 = scanner.next();
+        String productName1 = scanner.next();
 
         System.out.println("Enter price");
-        int price1 = scanner.nextInt();
+        double price1 = scanner.nextInt();
 
-        if (productType.equals("Electronic")){
+        if (productType.equals("E")){
 
+            System.out.println("Enter brand name");
+            String brand1=scanner.next();
+
+            System.out.println("Enter warranty period");
+            int warranty1 = scanner.nextInt();
+
+            this.product1 = new Electronics(productId1,productName1, price1,brand1,warranty1);
+
+        } else if (productType.equals("C")) {
+            System.out.println("Enter color name");
+            String colour1=scanner.next();
+
+            System.out.println("Enter warranty period");
+            double size1 = scanner.nextDouble();
+            this.product1 = new Clothing(productId1, productName1, price1,colour1,size1);
+        } else{
+            System.out.println("Enter correct product type");
+            addNewProduct();
         }
 
-        Product product1= new Electronics(productId1, productname1, price1) {
-        }
-
-
-
-
-
-
-
+        return product1;
     }
+
 
     @Override
     public void deleteProduct() {
@@ -71,6 +87,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 break;
         }
     }
+
+
+
+
 
 
 
