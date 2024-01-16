@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class WestminsterShoppingManager implements ShoppingManager{
 
@@ -8,21 +7,50 @@ public class WestminsterShoppingManager implements ShoppingManager{
     //Product product1;
 
 
-    static List<Product> productList = new ArrayList<>();
+    List<Product> productList1= new ArrayList<>();
 
-    public WestminsterShoppingManager(List<Product> productList){
-        this.productList = productList;
+//    public WestminsterShoppingManager(List<Product> productList){
+//        this.productList1= productList;
+//    }
+
+    @Override
+    public  void displayMenu() {
+
+        System.out.println("1. Add a new product\n2. Delete a product\n3. Print the list of the products\n4. Save in a file");
+
+        Scanner scanner = new Scanner(System.in);
+        int userInput = scanner.nextInt();
+
+        switch (userInput) {
+            case 1:
+                addNewProduct();
+                break;
+            case 2:
+                deleteProduct();
+                break;
+            case 3:
+                printProducts();
+                break;
+            case 4:
+                saveFile();
+                break;
+            default:
+                System.out.println("Enter correct input");
+
+
+        }
+
     }
 
     @Override
-     public void addNewProduct() {
+    public void addNewProduct() {
 
         System.out.println("Enter product type");
         String productType = scanner.next();
 
 
 
-        if (productType.equals("E")){
+        if (productType.equals("e")){
             System.out.println("Enter product Id");
             String productId1 = scanner.next();
 
@@ -37,11 +65,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
             System.out.println("Enter warranty period");
             int warranty1 = scanner.nextInt();
-            productList.add(new Electronics(productId1,productName1, price1,brand1,warranty1));
+            productList1.add(new Electronics(productId1,productName1, price1,brand1,warranty1));
 
             //product1 = new Electronics(productId1,productName1, price1,brand1,warranty1);
 
-        } else if (productType.equals("C")) {
+        } else if (productType.equals("c")) {
             System.out.println("Enter product Id");
             String productId1 = scanner.next();
 
@@ -56,40 +84,55 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
             System.out.println("Enter warranty period");
             double size1 = scanner.nextDouble();
-            productList.add( new Clothing(productId1, productName1, price1,colour1,size1));
+            productList1.add( new Clothing(productId1, productName1, price1,colour1,size1));
             //product1 = new Clothing(productId1, productName1, price1,colour1,size1);
         } else{
             System.out.println("Enter correct product type");
             addNewProduct();
         }
         //productList.add(product1);
-        System.out.println(productList.size());
+
     }
 
 
     @Override
     public void deleteProduct() {
+        if(!productList1.isEmpty()) {
+            System.out.println("Enter product ID of item you need to remove");
+            String productIDToRemove = scanner.next();
 
-        System.out.println("Enter product ID of item you need to remove");
-        String productIDToRemove = scanner.next();
+            int flag=0;
 
-        for (Product x : productList){
-            if (x.getProductID().equals(productIDToRemove)){
-                productList.remove(x);
-
-            }else {
-                System.out.println("item didn't find to delete");
+            for (Product x : productList1) {
+                if (x.getProductID().equals(productIDToRemove)) {
+                    productList1.remove(x);
+                    System.out.println("Item removed");
+                    flag = 1;
+                    break;
+                }
             }
+            if (flag==0){
+                System.out.println("Enter a valid ID");
+                deleteProduct();
+            }
+
+        }else{
+            System.out.println("No products to delete");
         }
 
-        System.out.println(productList.size());
-
-
+        //System.out.println(productList.size());
     }
 
     @Override
     public void printProducts() {
+        Collections.sort(productList1, Comparator.comparing(Product::getProductID));
 
+        for(Product x:productList1){
+            if (x instanceof Electronics){
+                System.out.println("Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period"+((Electronics) x).getWarranty());
+            }
+        }
+        System.out.println();
     }
 
     @Override
@@ -98,31 +141,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
     }
 
     @Override
-    public  void displayMenu() {
 
-            System.out.println("1. Add a new product\n2. Delete a product\n3. Print the list of the products\n4. Save in a file");
 
-            Scanner scanner = new Scanner(System.in);
-            int userInput = scanner.nextInt();
-
-            switch (userInput) {
-                case 1:
-                    addNewProduct();
-                    break;
-                case 2:
-                    deleteProduct();
-                    break;
-                case 3:
-                    printProducts();
-                    break;
-                case 4:
-                    saveFile();
-                    break;
-
-            //return product1;
-
-        }
-       // return product1;
+    public void getID(int x){
+        System.out.println(productList1.get(x).getProductID());
     }
 
 
@@ -132,5 +154,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
 
 
-}
+    }
+
+
+
+
+
+
 

@@ -1,35 +1,31 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<Product> productList = new ArrayList<>();
-        ShoppingManager shopItem = new WestminsterShoppingManager(productList);
-        //shopItem.displayMenu();
+        //List<Product> productList = new ArrayList<>();
+        ShoppingManager shopItem = new WestminsterShoppingManager();
 
-//        Product electronics = new Electronics("abc", "xperia 1", 200000, "sony", 1);
-//        Product clothing = new Clothing("xyz", "shorts", 500, "black", 28);
+        for(int p = 1; p <= 5; p++){
+            shopItem.displayMenu();
+            //System.out.println(shopItem);
+        }
 
-//        Product newProduct = shopItem.displayMenu();
-
-
-//        productList.add(electronics);
-//        productList.add(clothing);
-//        productList.add(newProduct);
-//
-//        System.out.println(productList.size());
+        //shopItem.getID(3);
 
 
-        //System.out.println(x.getProductID());
-        //System.out.println(productList.get(0).getProductName());
 
-        while (true){shopItem.displayMenu();}
+
+
+
+
+
 
 
 
 
     }
-
 
 
 }
