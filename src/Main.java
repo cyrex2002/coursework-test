@@ -1,7 +1,9 @@
 
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -17,23 +19,23 @@ public class Main extends Application {
         //List<Product> productList = new ArrayList<>();
         ShoppingManager shopItem = new WestminsterShoppingManager();
 
-        while (true){
-            shopItem.displayMenu();
-            //System.out.println(shopItem);
-        }
+//        while (true){
+//            shopItem.displayMenu();
+//            //System.out.println(shopItem);
+//        }
 
-        //shopItem.getID(3);
-        //launch();
+
+        launch();
     }
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        StackPane root =new StackPane();
+        Parent root = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
 
         Scene Scene1 = new Scene(root);
         stage.setScene(Scene1);
-        stage.setTitle("paca");
+        stage.setTitle("Shopping center");
         stage.show();
     }
 }
