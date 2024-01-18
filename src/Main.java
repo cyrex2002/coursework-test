@@ -16,6 +16,10 @@ import java.util.Scanner;
 public class Main extends Application {
     public static void main(String[] args) {
 
+
+
+
+
         //List<Product> productList = new ArrayList<>();
         ShoppingManager shopItem = new WestminsterShoppingManager();
 
@@ -23,9 +27,7 @@ public class Main extends Application {
 //            shopItem.displayMenu();
 //            //System.out.println(shopItem);
 //        }
-
-
-        launch();
+       launch();
     }
 
 
