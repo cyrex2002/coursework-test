@@ -19,26 +19,32 @@ public class WestminsterShoppingManager implements ShoppingManager{
         System.out.println("1. Add a new product\n2. Delete a product\n3. Print the list of the products\n4. Save in a file");
 
         Scanner scanner = new Scanner(System.in);
-        int userInput = scanner.nextInt();
+        try {
+            int userInput = scanner.nextInt();
+            switch (userInput) {
+                case 1:
+                    addNewProduct();
+                    break;
+                case 2:
+                    deleteProduct();
+                    break;
+                case 3:
+                    printProducts();
+                    break;
+                case 4:
+                    saveFile();
+                    break;
+                default:
+                    System.out.println("Enter correct input");
 
-        switch (userInput) {
-            case 1:
-                addNewProduct();
-                break;
-            case 2:
-                deleteProduct();
-                break;
-            case 3:
-                printProducts();
-                break;
-            case 4:
-                saveFile();
-                break;
-            default:
-                System.out.println("Enter correct input");
 
+            }
+
+        }catch (Exception e){
+            System.out.println("Enter valid input");
 
         }
+
 
     }
 
@@ -129,7 +135,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         for(Product x:productList1){
             if (x instanceof Electronics){
-                System.out.println("Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period"+((Electronics) x).getWarranty());
+                System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period"+((Electronics) x).getWarranty());
+            }else{
+                System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Clothing) x).getColour()+" Warranty period"+((Clothing) x).getSize());
             }
         }
         System.out.println();

@@ -17,13 +17,13 @@ public class Main extends Application {
         //List<Product> productList = new ArrayList<>();
         ShoppingManager shopItem = new WestminsterShoppingManager();
 
-//        for(int p = 1; p <= 5; p++){
-//            shopItem.displayMenu();
-//            //System.out.println(shopItem);
-//        }
+        while (true){
+            shopItem.displayMenu();
+            //System.out.println(shopItem);
+        }
 
         //shopItem.getID(3);
-        launch();
+        //launch();
     }
 
 
@@ -31,8 +31,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         StackPane root =new StackPane();
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Scene Scene1 = new Scene(root);
+        stage.setScene(Scene1);
         stage.setTitle("paca");
         stage.show();
     }
