@@ -3,11 +3,18 @@ import java.util.*;
 
 public class WestminsterShoppingManager implements ShoppingManager{
 
+
+    public WestminsterShoppingManager(){
+    };
+
+
     Scanner scanner = new Scanner(System.in);
     //Product product1;
 
 
     List<Product> productList1= new ArrayList<>();
+
+
 
 //    public WestminsterShoppingManager(List<Product> productList){
 //        this.productList1= productList;
@@ -153,6 +160,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     public void getID(int x){
         System.out.println(productList1.get(x).getProductID());
+    }
+
+    public List<Product> getList(){
+        return productList1;
     }
 
 
