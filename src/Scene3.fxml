@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scene3Controller">
+   <children>
+      <TableView layoutX="21.0" layoutY="52.0" prefHeight="200.0" prefWidth="558.0">
+        <columns>
+          <TableColumn prefWidth="228.8000144958496" text="Product" />
+          <TableColumn prefWidth="164.00001525878906" text="Quantity" />
+            <TableColumn prefWidth="168.800048828125" text="Price" />
+        </columns>
+      </TableView>
+      <Label layoutX="273.0" layoutY="275.0" text="Total" />
+      <Label layoutX="147.0" layoutY="301.0" text="First Purchase Discount(10%)" />
+      <Label layoutX="67.0" layoutY="333.0" text="Three items in same catergory Discout(20%)" />
+      <Label layoutX="247.0" layoutY="362.0" text="final Total" />
+   </children>
+</AnchorPane>

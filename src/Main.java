@@ -37,7 +37,8 @@ public class Main extends Application {
 
         Scene Scene1 = new Scene(root);
         stage.setScene(Scene1);
-        stage.setTitle("Shopping center");
+        stage.setTitle("Login");
+        stage.setTitle("Login");
         stage.show();
     }
 }

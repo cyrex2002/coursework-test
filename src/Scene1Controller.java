@@ -35,6 +35,7 @@ public class Scene1Controller {
                 Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
+                stage.setTitle("Shopping center");
                 stage.setScene(scene);
                 stage.show();
 
