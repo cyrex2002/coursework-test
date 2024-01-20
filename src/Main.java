@@ -23,11 +23,15 @@ public class Main extends Application {
         //List<Product> productList = new ArrayList<>();
         WestminsterShoppingManager shopItem = new WestminsterShoppingManager();
 
-//        while (true){
-//            shopItem.displayMenu();
-//            System.out.println(shopItem);
-//        }
-       launch();
+        shopItem.load();
+        while (true){
+            shopItem.displayMenu();
+            if(shopItem.exitcode1.equals("exit")){
+                break;
+            }
+        }
+
+        launch();
     }
 
 

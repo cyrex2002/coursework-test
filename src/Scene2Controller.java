@@ -7,27 +7,32 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.EventObject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class  Scene2Controller implements Initializable{
-    @FXML
-    WestminsterShoppingManager manager;
+public class  Scene2Controller extends Main implements Initializable{
+
+    List<Product> productList2;
+    List<Product> catergirizedList = new ArrayList<>();
+    ObservableList<Product> list;
+
+
     public Scene2Controller(){
-        this.manager=new WestminsterShoppingManager();
+        WestminsterShoppingManager shopItem2 = new WestminsterShoppingManager();
+        shopItem2.load();
+        productList2 = shopItem2.getList();
+
+        list = FXCollections.observableArrayList(catergirizedList);
+
     }
-
-
 
 
     @FXML
@@ -48,15 +53,6 @@ public class  Scene2Controller implements Initializable{
     @FXML
     private TableColumn<Product, String> category;
 
-    ObservableList<Product> list = FXCollections.observableArrayList(
-            new Electronics("brr","brr",22,"ww",1)
-    );
-
-
-
-
-
-
 
     private final String[] categories = {"all","Electronics","Clothing"};
     @FXML
@@ -71,35 +67,43 @@ public class  Scene2Controller implements Initializable{
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
         id.setCellValueFactory(new PropertyValueFactory<Product,String>("productID"));
         price.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
-        name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
-
-        shopTable.setItems(list);
-
+       // name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
 
     }
     @FXML
     public void getCatergory(ActionEvent e){
-        manager.productList1.add(new Electronics("abc","abc",1,"1",1));
-        manager.productList1.add(new Electronics("abc","abc",1,"1",1));
-        catergory = choiceBox.getValue();
+        catergirizedList.clear();
+        //System.out.println(list2.size());
 
+        catergory = choiceBox.getValue();
         if(catergory.equals("Electronics")){
-            for (Product x:this.manager.productList1){
+
+
+            for (Product x: productList2){
                 if(x instanceof Electronics){
-                    System.out.println("ele");
+                    catergirizedList.add(x);
+                    list = FXCollections.observableArrayList(catergirizedList);
                 }
             }
+            //System.out.println(list3.size());
+            //System.out.println(list.size());
 
         } else if (catergory.equals("Clothing")) {
-            for (Product x:this.manager.productList1){
+
+            for (Product x: productList2){
                 if(x instanceof Clothing){
-                    System.out.println("clo");
+                    catergirizedList.add(x);
+                    list = FXCollections.observableArrayList(catergirizedList);
+
                 }
             }
 
         }else {
-            System.out.println("all");
+            catergirizedList.addAll(productList2);
+            list = FXCollections.observableArrayList(catergirizedList);
+            //System.out.println("all");
         }
+        shopTable.setItems(list);
     }
 
 

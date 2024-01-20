@@ -1,10 +1,13 @@
 
+import java.io.*;
 import java.util.*;
+
 
 public class WestminsterShoppingManager implements ShoppingManager{
 
 
     public WestminsterShoppingManager(){
+
     };
 
 
@@ -12,8 +15,10 @@ public class WestminsterShoppingManager implements ShoppingManager{
     //Product product1;
 
 
-    List<Product> productList1= new ArrayList<>();
+    public List<Product> productList1= new ArrayList<>();
 
+
+    String exitcode1 = "!exit";
 
 
 //    public WestminsterShoppingManager(List<Product> productList){
@@ -23,7 +28,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
     @Override
     public  void displayMenu() {
 
-        System.out.println("1. Add a new product\n2. Delete a product\n3. Print the list of the products\n4. Save in a file");
+        System.out.println("1. Add a new product\n2. Delete a product\n3. Print the list of the products\n4. Save in a file\n5. Exit");
 
         Scanner scanner = new Scanner(System.in);
         try {
@@ -41,6 +46,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 case 4:
                     saveFile();
                     break;
+                case 5:
+                    this.exitcode1 = "exit";
+                    break;
                 default:
                     System.out.println("Enter correct input");
 
@@ -49,7 +57,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         }catch (Exception e){
             System.out.println("Enter valid input");
-
         }
 
 
@@ -144,19 +151,28 @@ public class WestminsterShoppingManager implements ShoppingManager{
             if (x instanceof Electronics){
                 System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period"+((Electronics) x).getWarranty());
             }else{
-                System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Clothing) x).getColour()+" Warranty period"+((Clothing) x).getSize());
+                System.out.println("Product type:Clothing "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Clothing) x).getColour()+" Warranty period"+((Clothing) x).getSize());
             }
         }
         System.out.println();
     }
 
     @Override
-    public void saveFile() {
+    public void saveFile()  {
+        try {
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("File.dat"));
+            output.writeObject(productList1);
+            output.close();
+
+        }
+        catch (IOException ioe){
+            System.out.println("Error saving file");
+        }
+
 
     }
 
     @Override
-
 
     public void getID(int x){
         System.out.println(productList1.get(x).getProductID());
@@ -165,6 +181,20 @@ public class WestminsterShoppingManager implements ShoppingManager{
     public List<Product> getList(){
         return productList1;
     }
+
+    public void load(){
+        try {
+            ObjectInputStream input = new ObjectInputStream(new FileInputStream("File.dat"));
+            productList1 = (List<Product>)input.readObject();
+        }catch (IOException ioe) {
+            System.err.println("Error opening file");
+        }catch (ClassNotFoundException cmfe){
+            System.err.println("Object is not a List");
+        }
+    }
+
+
+
 
 
 
