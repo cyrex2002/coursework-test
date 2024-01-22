@@ -14,7 +14,7 @@ public class Clothing extends Product{
         return colour;
     }
 
-    public  double getSize(){
+    public double getSize(){
         return size;
     }
 

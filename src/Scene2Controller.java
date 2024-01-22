@@ -8,9 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -20,9 +22,24 @@ import java.util.ResourceBundle;
 
 public class  Scene2Controller extends Main implements Initializable{
 
+    @FXML
+    private Label id_L;
+    @FXML
+    private Label category_L;
+    @FXML
+    private Label name_L;
+    @FXML
+    private Label size_L;
+    @FXML
+    private Label colour_L;
+
+    Product selectedItem;
     List<Product> productList2;
     List<Product> catergirizedList = new ArrayList<>();
     ObservableList<Product> list;
+
+    List<Product> cartList;
+
 
 
     public Scene2Controller(){
@@ -30,9 +47,9 @@ public class  Scene2Controller extends Main implements Initializable{
         shopItem2.load();
         productList2 = shopItem2.getList();
 
-        list = FXCollections.observableArrayList(catergirizedList);
 
     }
+
 
 
     @FXML
@@ -54,11 +71,13 @@ public class  Scene2Controller extends Main implements Initializable{
     private TableColumn<Product, String> category;
 
 
-    private final String[] categories = {"all","Electronics","Clothing"};
+
+    private final String[] categories = {"All","Electronics","Clothing"};
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML
     String catergory;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.getItems().addAll(categories);
@@ -67,13 +86,15 @@ public class  Scene2Controller extends Main implements Initializable{
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
         id.setCellValueFactory(new PropertyValueFactory<Product,String>("productID"));
         price.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
-       // name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
+        //name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
+
+
 
     }
     @FXML
     public void getCatergory(ActionEvent e){
         catergirizedList.clear();
-        //System.out.println(list2.size());
+
 
         catergory = choiceBox.getValue();
         if(catergory.equals("Electronics")){
@@ -82,28 +103,43 @@ public class  Scene2Controller extends Main implements Initializable{
             for (Product x: productList2){
                 if(x instanceof Electronics){
                     catergirizedList.add(x);
-                    list = FXCollections.observableArrayList(catergirizedList);
                 }
             }
-            //System.out.println(list3.size());
-            //System.out.println(list.size());
+
 
         } else if (catergory.equals("Clothing")) {
 
             for (Product x: productList2){
                 if(x instanceof Clothing){
                     catergirizedList.add(x);
-                    list = FXCollections.observableArrayList(catergirizedList);
-
                 }
             }
 
         }else {
             catergirizedList.addAll(productList2);
-            list = FXCollections.observableArrayList(catergirizedList);
-            //System.out.println("all");
         }
+
+        list = FXCollections.observableArrayList(catergirizedList);
         shopTable.setItems(list);
+    }
+
+    @FXML
+    public void displaySelectedItem(MouseEvent event){
+        this.selectedItem = shopTable.getSelectionModel().getSelectedItem();
+        if(selectedItem instanceof Clothing) {
+            id_L.setText("Product ID: "+ selectedItem.getProductID());
+            category_L.setText("Category: Clothing");
+            name_L.setText("Name: "+selectedItem.getProductName());
+            size_L.setText("Size: "+String.valueOf(((Clothing) selectedItem).getSize()));
+            colour_L.setText("Colour: "+((Clothing) selectedItem).getColour());
+        }else if(selectedItem instanceof Electronics){
+            id_L.setText("Product ID: "+ selectedItem.getProductID());
+            category_L.setText("Category: Electronics");
+            name_L.setText("Name: "+selectedItem.getProductName());
+            size_L.setText("Brand: "+((Electronics) selectedItem).getBrand());
+            colour_L.setText("Warranty: "+((Electronics) selectedItem).getWarranty());
+        }
+
     }
 
 
@@ -117,6 +153,16 @@ public class  Scene2Controller extends Main implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    public void AddToCart(ActionEvent event){
+        this.cartList.add(this.selectedItem);
+    }
+    @FXML
+    public List<Product> getCartList(){
+        return this.cartList;
+    }
+
 
 
 }
