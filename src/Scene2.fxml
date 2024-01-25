@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scene2Controller">
    <children>
       <Button fx:id="cartBtn" layoutX="672.0" layoutY="40.0" mnemonicParsing="false" onAction="#goToCart" text="Shopping Cart" textAlignment="CENTER" />
-      <Button layoutX="323.0" layoutY="753.0" mnemonicParsing="false" onAction="#AddToCart" text="Add to Shopping Cart" />
+      <Button layoutX="323.0" layoutY="753.0" mnemonicParsing="false" onAction="#didSelectObject" text="Add to Shopping Cart" />
       <ChoiceBox fx:id="choiceBox" layoutX="324.0" layoutY="40.0" prefWidth="150.0" />
       <Label layoutX="166.0" layoutY="44.0" text="Select Product Category" />
       <TableView fx:id="shopTable" layoutX="36.0" layoutY="133.0" onMouseClicked="#displaySelectedItem" prefHeight="266.0" prefWidth="726.0">

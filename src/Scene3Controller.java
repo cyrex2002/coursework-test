@@ -1,23 +1,57 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Scene3Controller implements Initializable {
 
-    List<Product> cartlist;
+    @FXML
+    private TableColumn<Product, Double> cartPrice;
 
-    public Scene3Controller(){}
+    @FXML
+    private TableColumn<Product, String> cartProduct;
 
-    public Scene3Controller(Scene2Controller a){
-        this.cartlist =a.getCartList();
-        System.out.println(cartlist.get(0).getProductName());
-    }
+    @FXML
+    private TableColumn<?, ?> cartQuantity;
+
+    @FXML
+    private TableView<Product> cartTable;
+
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+       // ArrayList<Product> regularList = FXCollections.observableArrayList(SharedDataModel.getInstance().getSelectedObjects());
+        cartProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("ProductName"));
+        cartPrice.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
+        cartTable.setItems(SharedDataModel.getInstance().getSelectedObjects());
     }
+
+    @FXML void goback(ActionEvent event)throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Shopping Cart");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

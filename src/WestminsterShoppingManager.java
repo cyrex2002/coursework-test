@@ -69,10 +69,27 @@ public class WestminsterShoppingManager implements ShoppingManager{
         String productType = scanner.next();
 
 
+        Integer itemQuantityInCart = null;
+        //int quantityC = 0;
+        if (productType.equals("e")) {
 
-        if (productType.equals("e")){
             System.out.println("Enter product Id");
             String productId1 = scanner.next();
+
+            int quantityE = 0;
+
+            for (Product x : productList1) {
+                if (x.getProductID().equals(productId1) && x.getClass().equals(Electronics.class)) {
+                    quantityE = x.getQuantity() + 1;
+                    x.setQuantity(quantityE);
+                    return;
+                } else {
+                    break;
+                }
+
+            }
+
+            quantityE = 1;
 
             System.out.println("Enter product name");
             String productName1 = scanner.next();
@@ -81,18 +98,31 @@ public class WestminsterShoppingManager implements ShoppingManager{
             double price1 = scanner.nextInt();
 
             System.out.println("Enter brand name");
-            String brand1=scanner.next();
+            String brand1 = scanner.next();
 
             System.out.println("Enter warranty period");
             int warranty1 = scanner.nextInt();
-            productList1.add(new Electronics(productId1,productName1, price1,brand1,warranty1));
+            itemQuantityInCart = 0;
+            productList1.add(new Electronics(productId1, productName1, price1, brand1, warranty1, quantityE, itemQuantityInCart));
 
-            //product1 = new Electronics(productId1,productName1, price1,brand1,warranty1);
 
         } else if (productType.equals("c")) {
             System.out.println("Enter product Id");
             String productId1 = scanner.next();
 
+            int quantityC = 0;
+
+            for (Product x : productList1) {
+                if (x.getProductID().equals(productId1) && x.getClass().equals(Clothing.class)) {
+                    quantityC = x.getQuantity() + 1;
+                    x.setQuantity(quantityC);
+                    return;
+                } else {
+                    break;
+                }
+            }
+
+            quantityC = 1;
             System.out.println("Enter product name");
             String productName1 = scanner.next();
 
@@ -100,17 +130,17 @@ public class WestminsterShoppingManager implements ShoppingManager{
             double price1 = scanner.nextInt();
 
             System.out.println("Enter color name");
-            String colour1=scanner.next();
+            String colour1 = scanner.next();
 
-            System.out.println("Enter warranty period");
+            System.out.println("Enter size period");
             double size1 = scanner.nextDouble();
-            productList1.add( new Clothing(productId1, productName1, price1,colour1,size1));
-            //product1 = new Clothing(productId1, productName1, price1,colour1,size1);
-        } else{
+            productList1.add(new Clothing(productId1, productName1, price1, colour1, size1, quantityC, itemQuantityInCart));
+
+        } else {
             System.out.println("Enter correct product type");
             addNewProduct();
         }
-        //productList.add(product1);
+
 
     }
 
@@ -149,9 +179,9 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         for(Product x:productList1){
             if (x instanceof Electronics){
-                System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period"+((Electronics) x).getWarranty());
+                System.out.println("Product type:Electronics "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Electronics) x).getBrand()+" Warranty period:"+((Electronics) x).getWarranty()+" Quantity:"+x.getQuantity());
             }else{
-                System.out.println("Product type:Clothing "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product brand:"+((Clothing) x).getColour()+" Warranty period"+((Clothing) x).getSize());
+                System.out.println("Product type:Clothing "+"Product ID:"+x.getProductID()+"  Product name:"+x.getProductName()+"  Product price:"+x.getPrice()+"  Product colour:"+((Clothing) x).getColour()+" Size:"+((Clothing) x).getSize()+" Quantity: "+x.getQuantity());
             }
         }
         System.out.println();

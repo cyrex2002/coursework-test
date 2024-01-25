@@ -38,7 +38,7 @@ public class  Scene2Controller extends Main implements Initializable{
     List<Product> catergirizedList = new ArrayList<>();
     ObservableList<Product> list;
 
-    List<Product> cartList;
+    List<Product> cartList = new ArrayList<>();
 
 
 
@@ -46,8 +46,6 @@ public class  Scene2Controller extends Main implements Initializable{
         WestminsterShoppingManager shopItem2 = new WestminsterShoppingManager();
         shopItem2.load();
         productList2 = shopItem2.getList();
-
-
     }
 
 
@@ -82,6 +80,7 @@ public class  Scene2Controller extends Main implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.getItems().addAll(categories);
         choiceBox.setOnAction(this::getCatergory);
+        choiceBox.getSelectionModel().selectFirst();
 
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
         id.setCellValueFactory(new PropertyValueFactory<Product,String>("productID"));
@@ -142,9 +141,6 @@ public class  Scene2Controller extends Main implements Initializable{
 
     }
 
-
-
-
     public void goToCart(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scene3.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -156,12 +152,29 @@ public class  Scene2Controller extends Main implements Initializable{
 
     @FXML
     public void AddToCart(ActionEvent event){
-        this.cartList.add(this.selectedItem);
+        cartList.add(shopTable.getSelectionModel().getSelectedItem());
+        System.out.println(cartList.size());
     }
+
+
     @FXML
-    public List<Product> getCartList(){
-        return this.cartList;
+    private void didSelectObject() {
+       // Product selectedObject = shopTable.getSelectionModel().getSelectedItem();
+        //cartList.add(shopTable.getSelectionModel().getSelectedItem());
+        SharedDataModel.getInstance().getSelectedObjects().add(shopTable.getSelectionModel().getSelectedItem());
+        //System.out.println(cartList.size());
+        for(Product x:SharedDataModel.getInstance().getSelectedObjects()){
+            if (x.getProductID().equals(shopTable.getSelectionModel().getSelectedItem().getProductID())){
+
+            }else {
+                SharedDataModel.getInstance().getSelectedObjects().add(shopTable.getSelectionModel().getSelectedItem());
+            }
+        }
     }
+
+
+
+
 
 
 
