@@ -1,5 +1,4 @@
 public class Clothing extends Product{
-
     double size;
     String colour;
 

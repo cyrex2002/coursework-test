@@ -28,7 +28,7 @@ public class Scene3Controller implements Initializable {
     private TableColumn<Product, String> cartProduct;
 
     @FXML
-    private TableColumn<?, ?> cartQuantity;
+    private TableColumn<Product, Integer> cartQuantity;
 
     @FXML
     private TableView<Product> cartTable;
@@ -42,6 +42,7 @@ public class Scene3Controller implements Initializable {
        // ArrayList<Product> regularList = FXCollections.observableArrayList(SharedDataModel.getInstance().getSelectedObjects());
         cartProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("ProductName"));
         cartPrice.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
+        cartQuantity.setCellValueFactory(new PropertyValueFactory<Product,Integer>("itemQuantityInCart"));
         cartTable.setItems(SharedDataModel.getInstance().getSelectedObjects());
     }
 
