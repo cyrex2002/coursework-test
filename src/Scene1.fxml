@@ -29,5 +29,6 @@
          </font>
       </Label>
       <Button layoutX="243.0" layoutY="280.0" mnemonicParsing="false" onAction="#signUp" text="Sign up " />
+      <Label fx:id="passworderr" alignment="CENTER" layoutY="220.0" prefHeight="18.0" prefWidth="400.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Scene4Controller {
 
-
-
     @FXML
     private PasswordField newPassword;
 
@@ -39,7 +37,7 @@ public class Scene4Controller {
         reNewPassword1 = reNewPassword.getText();
 
         if(newPassword1.equals(reNewPassword1)){
-//            load();
+            load();
 
             User user = new User(newUserName1,newPassword1);
             userList.add(user);
@@ -60,11 +58,11 @@ public class Scene4Controller {
 
         }
         //load();
-        System.out.println(userList.get(0).getUserName());
+        //System.out.println(userList.get(0).getUserName());
 
 
     }
-    @FXML
+
     public void load(){
         try {
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("userFile.dat"));
