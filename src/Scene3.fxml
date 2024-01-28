@@ -15,10 +15,11 @@
             <TableColumn fx:id="cartPrice" prefWidth="168.800048828125" text="Price" />
         </columns>
       </TableView>
-      <Label layoutX="273.0" layoutY="275.0" text="Total" />
-      <Label layoutX="147.0" layoutY="301.0" text="First Purchase Discount(10%)" />
-      <Label layoutX="67.0" layoutY="333.0" text="Three items in same catergory Discout(20%)" />
-      <Label layoutX="247.0" layoutY="362.0" text="final Total" />
+      <Label fx:id="totalL" layoutX="273.0" layoutY="275.0" text="Total" />
+      <Label fx:id="FPDL" layoutX="147.0" layoutY="301.0" text="First Purchase Discount(10%)" />
+      <Label fx:id="TIISMDL" layoutX="67.0" layoutY="333.0" text="Three items in same catergory Discout(20%)" />
+      <Label fx:id="finalTotal" layoutX="247.0" layoutY="362.0" text="final Total" />
       <Button layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#goback" text="go back" />
+      <Button fx:id="buyBtn" layoutX="531.0" layoutY="358.0" mnemonicParsing="false" text="Buy" />
    </children>
 </AnchorPane>
