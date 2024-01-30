@@ -150,44 +150,23 @@ public class  Scene2Controller extends Main implements Initializable{
         stage.show();
     }
 
-//    @FXML
-//    public void AddToCart(ActionEvent event){
-//        cartList.add(shopTable.getSelectionModel().getSelectedItem());
-//        System.out.println(cartList.size());
-//    }
 
 
     @FXML
     private void didSelectObject(ActionEvent event) {
-        //Product selectedObject = shopTable.getSelectionModel().getSelectedItem();
-        //cartList.add(shopTable.getSelectionModel().getSelectedItem());
-//        SharedDataModel.getInstance().getSelectedObjects().add(shopTable.getSelectionModel().getSelectedItem());
-
-//        for (Product x : SharedDataModel.getInstance().getSelectedObjects()) {
-//            if (x.equals(shopTable.getSelectionModel().getSelectedItem())) {
-//                int updateQuntity = x.getItemQuantityInCart();
-//                updateQuntity=updateQuntity+1;
-//                x.setItemQuantityInCart(updateQuntity);
-//            }
-//        }
-//
-//        SharedDataModel.getInstance().getSelectedObjects().add(shopTable.getSelectionModel().getSelectedItem());
-
-
-            int flag=0;
-
-            for (Product x : SharedDataModel.getInstance().getSelectedObjects()) {
-                if (x.getProductID().equals(shopTable.getSelectionModel().getSelectedItem().getProductID())) {
+        int flag=0;
+        for (Product x : SharedDataModel.getInstance().getSelectedObjects()) {
+            if (x.getProductID().equals(shopTable.getSelectionModel().getSelectedItem().getProductID())) {
                     int updateQuantity = x.getItemQuantityInCart();
                     updateQuantity=updateQuantity+1;
                     x.setItemQuantityInCart(updateQuantity);
                     flag=1;
+            }
+        }
 
-                }
-            }
-            if (flag==0){
+        if (flag==0){
                 SharedDataModel.getInstance().getSelectedObjects().add(shopTable.getSelectionModel().getSelectedItem());
-            }
+        }
 
 
     }

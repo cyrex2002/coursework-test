@@ -20,9 +20,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
     String exitcode1 = "!exit";
 
 
-//    public WestminsterShoppingManager(List<Product> productList){
-//        this.productList1= productList;
-//    }
 
     @Override
     public  void displayMenu() {
@@ -221,18 +218,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.err.println("Object is not a List");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    }
+}
 
 
 

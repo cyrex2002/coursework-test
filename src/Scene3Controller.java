@@ -1,5 +1,5 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +13,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Scene3Controller implements Initializable {
 
@@ -50,6 +49,9 @@ public class Scene3Controller implements Initializable {
 
 
     List<Product> cartlist1 = new ArrayList<>();
+    List<User> userList1 = new ArrayList<>();
+
+
     double total ;
 
 
@@ -67,6 +69,15 @@ public class Scene3Controller implements Initializable {
         cartTable.setItems(SharedDataModel.getInstance().getSelectedObjects());
 
 
+        try {
+            ObjectInputStream input = new ObjectInputStream(new FileInputStream("userFile.dat"));
+            userList1 = (List<User>)input.readObject();
+        }catch (IOException ioe) {
+            System.err.println("Error opening file");
+        }catch (ClassNotFoundException cmfe){
+            System.err.println("Object is not a List");
+        }
+
         cartlist1 = SharedDataModel.getInstance().getSelectedObjects();
         double TIISMD = 0;
         for (Product x : cartlist1) {
@@ -76,15 +87,34 @@ public class Scene3Controller implements Initializable {
             }
             total += y;
         }
+
+        double FPD = 0;
+
+        Integer flag = 0;
+        for (User user:userList1){
+            if(SharedDataModel.getInstance().getUsername().equals(user.getUserName())){
+                if (user.getFirstTimePurchased().equals(0)){
+                     FPD = total*0.1;
+                }
+                flag = 1;
+            }
+            if (flag.equals(1)){
+                break;
+            }
+
+        }
+
+
         totalL.setText("Total: " + total);
+        FPDL.setText("First Purchase Discount(10%): "+FPD);
         TIISMDL.setText("Three items in same category discount(20%): " + TIISMD);
 
-
+        finalTotal.setText("final Total: "+(total-TIISMD-FPD));
     }
 
     @FXML
     public void goback(ActionEvent event)throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Scene2.fxml")));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("Shopping Cart");
         Scene scene = new Scene(root);
